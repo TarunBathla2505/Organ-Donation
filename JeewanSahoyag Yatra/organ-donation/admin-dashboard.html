@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+
+<style>
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+/* fontawesome */
+[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+html {
+  font: 0.625em/1.4 "Lato", Helvetica Neue, sans;
+  height: 100%;
+}
+table{
+      /* border-collapse: collapse;
+      width: 50%;
+      margin: 20px; */
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+body {
+  height: 100%;
+  margin: 0px;
+  line-height: 18px;
+  font-size: 14px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  text-rendering: optimizelegibility;
+  background: #ebeef0;
+}
+
+#wrapper {
+  width: 100%;
+  min-width: 950px;
+  height: 100%;
+  margin: 0px auto;
+  overflow: auto;
+}
+
+.left-section {
+  height: 100%;
+  width: 250px;
+  background: #31373d;
+  float: left;
+}
+
+.right-section {
+  width: calc(100% - 250px);
+  float: right;
+}
+
+.nav {
+  background: #31373d;
+  padding: 0px;
+  margin: 0px;
+  width: 250px;
+  overflow: hidden;
+  list-style: none;
+  box-shadow: none repeat scroll 0% 0% #2b3136;
+  box-sizing: border-box;
+}
+
+.menu-item {
+  text-decoration: none;
+  padding: 15px 25px;
+  width: 197px;
+  display: block;
+  font-size: 1.2em;
+  color: #95a7b7;
+  -webkit-transition-duration: 0.15s; /* Safari */
+  transition-duration: 0.15s;
+}
+
+.ftm {
+  margin-right: 10px;
+}
+
+.fa-icon-lg {
+  font-size: 400%;
+  display: block;
+  margin: 5px 0px 30px 35px;
+}
+
+.menu-item:hover {
+  background: #272c30;
+  color: #fff;
+  border-left: 3px solid #50b7e0;
+}
+
+.arrow {
+  float: right;
+}
+
+#logo {
+  padding: 20px 0px 20px 20px;
+  border-bottom: 1px solid #222;
+}
+
+#top {
+  top: 0px;
+  width: 100%;
+  background: #272c30;
+  padding: 15px 25px;
+  height: 50px;
+  margin-right: 0px;
+  line-height: 50px;
+}
+
+#name {
+  margin: 0px;
+  color: #b3c814;
+}
+
+#top-left {
+  float: left;
+}
+
+#top-right {
+  float: right;
+  padding-right: 55px;
+}
+
+.btn {
+  background: #fcfcfc;
+  color: #4caf50;
+  border: 1px solid #e3e3e3;
+  vertical-align: middle;
+  -moz-user-select: none;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  text-transform: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  line-height: 30px;
+  padding: 0px 9px;
+}
+
+.btn:hover {
+  background: #f2f2f2;
+}
+
+.inner-container-left {
+  
+  /* width: calc(100% - 430px);
+  width:auto; 
+  margin: 25px 0px 0px 25px;
+  padding: 25px;
+  background: #fff;
+  -webkit-box-shadow: 2px 2px 8px 0px rgba(50, 50, 50, 0.26);
+  -moz-box-shadow:    2px 2px 8px 0px rgba(50, 50, 50, 0.26);
+  box-shadow:         2px 2px 8px 0px rgba(50, 50, 50, 0.26);
+  float: left; */
+  display:flex;
+  padding: 65px;
+  background-color: white;
+
+}
+
+
+input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 2px;
+}
+
+
+.clear {clear: both;}
+</style>
+
+<body>
+    <div id="wrapper">
+        <div class="left-section">
+            <ul class="nav">
+                <li id="logo">
+                    <img src="img/logo-no-background.png" style="width: 200px;">
+                </li>
+                <!-- <li><a href="#" class="menu-item"><span class="fontawesome-home ftm"></span>Home</a> -->
+    
+                <!-- </li> -->
+                <!-- <li><a href="#" class="menu-item"><span class="fontawesome-home font-awesome-margin"></span>About <span class="arrow">»</span></a> --></li>
+                <li onclick="(async () => {
+                  const userDataArray = await fetchDataForDonor();
+                  if (userDataArray && userDataArray.length > 0) {
+                    displayUserArray(userDataArray);
+                  }
+                })();"><a href="#" class="menu-item"><span class="fontawesome-user ftm"></span>Donor Details</a>
+    
+                </li>
+                <li onclick="(async () => {
+                  const userDataArray = await fetchDataForRequest();
+                  if (userDataArray && userDataArray.length > 0) {
+                    displayUserArrayForRequest(userDataArray);
+                  }
+                })();"><a href="#" class="menu-item"><span class="fontawesome-cog ftm"></span>Patient Details</a>
+    
+                </li>
+                <!-- <li onclick="(async ()=>{
+                  const userDataArray = await fetchDataForDonor();
+                  if (userDataArray && userDataArray.length > 0) {
+                    displayUserArray(userDataArray);
+                  }
+                })()"><a href="#" class="menu-item"><span class="fontawesome-envelope-alt ftm"></span>Search Donor</a>
+    
+                </li> -->
+                <!-- <li><a href="#" class="menu-item"><span class="fontawesome-heart ftm"></span>Search Patient</a> -->
+    
+                </li>
+                <li onclick="(async () => {
+                  const userDataArray = await fetchDonatedPatients();
+                  if (userDataArray && userDataArray.length > 0) {
+                    displayUserArray(userDataArray);
+                  }
+                })();"><a href="#" class="menu-item"><span class="fontawesome-list ftm"></span>Donated Patient</a>
+    
+                </li>
+                
+            </ul>
+        </div>
+        <div class="right-section">
+            <div id="top">
+                <div id="top-left">
+                     <h2 id="name">Admin Dashboard</h2>
+    
+                </div>
+                <div id="top-right"> 
+                      <input class="search-box" type="text" id="searchInput" placeholder="Search by Organ Name"><span class="fontawesome-signout ftm"></span>
+                      <!-- <a class="btn"><span class="fontawesome-file-alt ftm"></span>Search</a> -->
+                      <a href="admin.html" class="btn"><span class="fontawesome-signout ftm"></span>Sign Out</a>
+                </div>
+            </div>
+        </div>
+        <div class="inner-container-left" id="userDataContainer" >
+          <!-- User data will be dynamically displayed here -->
+        </div>
+    
+    </div>
+    
+
+</body>
+<script>
+    
+    async function fetchDonatedPatients(){
+      try {
+        const response = await fetch("http://127.0.0.1:5000/accepted-requests"); // Update the API endpoint
+        const userDataArray = await response.json();
+        return userDataArray;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+
+    async function fetchDataForDonor() {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/donor"); // Update the API endpoint
+        const userDataArray = await response.json();
+        return userDataArray;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+    async function fetchDonerForOrgan(){
+
+    }
+
+    async function fetchDataForRequest() {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/pending-requests"); // Update the API endpoint
+        const userDataArray = await response.json();
+        return userDataArray;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+
+    function displayUserArrayForRequest(userDataArray) {
+      const userDataContainer = document.getElementById('userDataContainer');
+
+      // Create a table element
+      const table = document.createElement('table');
+      table.id = 'dataTable';
+      table.style.borderCollapse = 'collapse';
+
+      // Create table header
+      const headerRow = table.insertRow();
+      for (const key in userDataArray[0]) {
+        if (userDataArray[0].hasOwnProperty(key)) {
+          const th = document.createElement('th');
+          th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+          headerRow.appendChild(th);
+        }
+      }
+      const th1 = document.createElement('th');
+      th1.innerHTML= "Check";
+      headerRow.appendChild(th1);
+      // cell1 = headerRow.insertCell(); // Empty cell for Reject button column header
+      // cell1.innerHTML = "Check For Avalability";
+
+      // Populate the table with JSON data
+      userDataArray.forEach(userData => {
+        const row = table.insertRow();
+        for (const key in userData) {
+          if (userData.hasOwnProperty(key)) {
+            const cell = row.insertCell();
+            cell.textContent = userData[key];
+          }
+        }
+
+        // Create Reject button for each row
+        const rejectCell = row.insertCell();
+        const rejectButton = document.createElement('button');
+        rejectButton.textContent = 'Check';
+        rejectButton.className = 'reject-button';
+        rejectButton.addEventListener('click', () => handleReject(userData));
+        rejectCell.appendChild(rejectButton);
+      });
+
+      // Append the table to the container
+      userDataContainer.innerHTML =""
+      userDataContainer.appendChild(table);
+    }
+    async function handleReject(userData){
+      try {
+        console.log(userData.id)
+        const response = await fetch("http://127.0.0.1:5000/request/match/"+userData.id,options = {
+          method: 'PUT',
+        });
+        console.log(response)
+        const userDataArray =  await response.json();
+        if(userDataArray.message === "Request Rejected"){
+          alert("no donor found request has been rejected");
+          await fetch("http://127.0.0.1:5000/request/"+userData.id,options = {
+            method: 'DELETE',
+          });
+          await fetch("http://127.0.0.1:5000/rejectMail/"+userData.email);
+        }
+        else if(userDataArray.message === "Request Accepted"){
+          await fetch("http://127.0.0.1:5000/acceptMail/"+userData.email);
+        }
+
+        return userDataArray;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+    function displayUserArray(userDataArray) {
+      const userDataContainer = document.getElementById('userDataContainer');
+      // Create a table element
+      const table = document.createElement('table');
+      table.id='dataTable';
+
+      table.style.borderCollapse = 'collapse';
+
+      // Create table header
+      const headerRow = table.insertRow();
+      for (const key in userDataArray[0]) {
+        if (userDataArray[0].hasOwnProperty(key)) {
+          const th = document.createElement('th');
+          th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+          headerRow.appendChild(th);
+        }
+      }
+
+      // Populate the table with JSON data
+      userDataArray.forEach(userData => {
+        const row = table.insertRow();
+        for (const key in userData) {
+          if (userData.hasOwnProperty(key)) {
+            const cell = row.insertCell();
+            cell.textContent = userData[key];
+          }
+        }
+      });
+
+      // Append the table to the container
+      userDataContainer.innerHTML = "";
+      userDataContainer.appendChild(table);
+    }
+
+
+    function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const table = document.getElementById('dataTable');
+            const rows = table.getElementsByTagName('tr');
+            // const headrow = rows[0];
+            // for(let i=0;i<headrow.length;i++){
+
+            // }
+            for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
+                const emailCell = rows[i].getElementsByTagName('td')[5];
+                const emailCell1 = rows[i].getElementsByTagName('td')[0];
+                const emailCell2 = rows[i].getElementsByTagName('td')[8];
+                const emailText = emailCell.textContent || emailCell.innerText;
+                const emailText1 = emailCell1.textContent || emailCell1.innerText;
+                const emailText2 = emailCell2.textContent || emailCell2.innerText;
+                if (emailText.toUpperCase().indexOf(filter) > -1||emailText1.toUpperCase().indexOf(filter) > -1||emailText2.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+        window.onload = async function() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+        };
+  </script>
+
+
+
+<!-- ... (Remaining HTML code) ... -->
+</html>
